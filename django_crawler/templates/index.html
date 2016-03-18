@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    {% load staticfiles %}
+    <script src="{% static "/static/js/jquery-1.12.1.min.js" %}"></script>
+    <script src="{% static "/static/js/bootstrap.js" %}"></script>
+    <link href="{% static "/static/css/bootstrap.css" %}" type="text/css">
+
+
+</head>
+<body>
+
+{% if linkss %}
+    {% for item in linkss %}
+        <a href="{{ item }}" >  Links </a>
+        <br />
+    {% endfor %}
+{% else %}
+    <p>Not Found</p>
+{% endif %}
+
+
+</body>
+</html>
