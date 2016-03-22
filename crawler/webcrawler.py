@@ -18,6 +18,7 @@ class LinkParser(HTMLParser):
 
     def getLinks(self, url):
 
+        global weblink
         self.links = []
         self.baseUrl = url
         response = LinkParser().getopen(url)
@@ -25,16 +26,21 @@ class LinkParser(HTMLParser):
             htmlBytes = response.read()
             htmlString = htmlBytes.decode("utf-8")
             self.feed(htmlString)
-            return htmlString, self.links
+            return self.links
         else:
             return "",[]
 
 
-
     def getopen(self,url):
-
         return urlopen(url)
 
+    def processing(self,weburl):
+
+            from multiprocessing.pool import ThreadPool
+            pool = ThreadPool(processes=1)
+            async_result = pool.apply_async(LinkParser().getLinks,(weburl,))
+            return_val = async_result.get()
+            return return_val
 
 
 

@@ -1,6 +1,8 @@
 from crawler import webcrawler
 from time import  time
 from threading import Thread
+
+
 class FatherSpider():
 
     @staticmethod
@@ -9,7 +11,6 @@ class FatherSpider():
         pagesToVisit = [url]
         numberVisited = 0
         foundWord = False
-        tm1 = time()
 
         while numberVisited < maxPages and pagesToVisit != [] or not foundWord:
 
@@ -18,20 +19,20 @@ class FatherSpider():
             pagesToVisit = pagesToVisit[1:]
 
             try:
+                tm1 = time()
 
-                data, links = webcrawler.LinkParser().getLinks(url)
-               # data ,title= webcrawler.TextParser().getLinks(url)
-                if data.find(word)> -1:
-                    foundWord = True
-                    pagesToVisit = pagesToVisit + links
-                    linklst = set(pagesToVisit)
-                    legthlink = len(linklst)
-                    tm2 = time()
-                    timeup = tm2 - tm1
-                    return (linklst,legthlink,timeup)
+                # Without thread
+                #links = webcrawler.LinkParser().getLinks(url)
+                # With Thread
+                lst = webcrawler.LinkParser().processing(url)
+                linklst = set(lst)
+                legthlink = len(linklst)
+                tm2 = time()
+                timeup = tm2 - tm1
+                return (linklst,legthlink,timeup)
 
             except Exception as e:
-                print( " **Failed!**")
+                print(" **Failed!**")
 
         if foundWord:
             print("The word", word, "was found at", url)
