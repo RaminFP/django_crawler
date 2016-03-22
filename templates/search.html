@@ -26,13 +26,7 @@
 
 <div class="container">
 
-
-    <div class="row">
-         <div class="col-sm-12">
-        <img id="imgsearch" class="img-responsive center-block" src="{% static "/static/img/google.jpg" %}" width="500px" height="300px">
-    </div>
-
-        <form id="textform" action="/" method="POST">
+        <form style="margin-top: -200px" action="/" method="POST">
             {% csrf_token %}
             <div class="col-lg-6 col-centered">
                 <div class="clearfix"></div>
