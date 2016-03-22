@@ -1,6 +1,6 @@
 from crawler import webcrawler
 from time import  time
-
+from django.shortcuts import HttpResponse
 
 class FatherSpider():
 
@@ -17,4 +17,5 @@ class FatherSpider():
                     return (linklst,legthlink,timeup)
 
         except Exception as e:
-                print(" **Failed!**")
+                return HttpResponse("Found Error : %s") % e
+
